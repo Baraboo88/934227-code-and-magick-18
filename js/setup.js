@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 document.querySelector('.setup').classList.remove('hidden');
 
@@ -50,7 +50,7 @@ function cloneAndAddElement(elementToClone, obj) {
   return clonedElement;
 }
 
-function addElementsToBlock (block, elementsArray, templateElement) {
+function addElementsToBlock(block, elementsArray, templateElement) {
   var documentFragment = document.createDocumentFragment();
   elementsArray.forEach(function (element) {
     documentFragment.appendChild(cloneAndAddElement(templateElement, element));
