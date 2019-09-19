@@ -9,8 +9,7 @@ var coatColors = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)
 var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
 
 var similarListElement = document.querySelector('.setup-similar-list');
-
-displayElements();
+var wizardsList = getListOfWizards(WIZARD_COUNT);
 
 function WizardConstructor() {
   this.name = getRandomItem(names) + ' ' + getRandomItem(surnames);
@@ -54,5 +53,6 @@ function displayElements() {
   document.querySelector('.setup-similar').classList.remove('hidden');
 }
 
-renderWizards(similarListElement, getListOfWizards(WIZARD_COUNT));
+renderWizards(similarListElement, wizardsList);
 
+displayElements();
