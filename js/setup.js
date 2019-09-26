@@ -99,7 +99,7 @@ function openSetupPopup() {
   document.addEventListener('keydown', onPopupEscPress);
   setupWizard.addEventListener('click', function (evt) {
     if (evt.target.classList.contains(('wizard-eyes'))) {
-      var randomEyesColor = getRandomItem(eyesColors)
+      var randomEyesColor = getRandomItem(eyesColors);
       evt.target.style.fill = randomEyesColor;
       document.getElementsByName('eyes-color')[0].value = randomEyesColor;
     }
@@ -111,7 +111,7 @@ function openSetupPopup() {
   });
 
   setupFireballWrap.addEventListener('click', function () {
-    var randomFireballColor = getRandomItem(fireBallColors)
+    var randomFireballColor = getRandomItem(fireBallColors);
     setupFireballWrap.style.backgroundColor = randomFireballColor;
     document.getElementsByName('fireball-color')[0].value = randomFireballColor;
   });
