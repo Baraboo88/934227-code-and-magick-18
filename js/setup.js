@@ -49,23 +49,23 @@ function renderWizards(block, elementsArray) {
   block.appendChild(documentFragment);
 }
 
-function enterPressHandler(evt) {
+function onEnterPress(evt) {
   var eventNumber = evt.keyCode;
   if (eventNumber === ENTER_CODE) {
-    closeSetupPopupHandler();
+    onCloseSetupPopup();
   }
 }
 
-function popupActivation() {
+function activatePopup() {
   var setupClose = document.querySelector('.setup-close');
   var setupOpen = document.querySelector('.setup-open');
-  setupOpen.addEventListener('click', openSetupPopup);
+  setupOpen.addEventListener('click', onOpenSetupPopup);
 
-  setupOpen.addEventListener('keydown', enterPressHandler);
+  setupOpen.addEventListener('keydown', onEnterPress);
 
-  setupClose.addEventListener('click', closeSetupPopupHandler);
+  setupClose.addEventListener('click', onCloseSetupPopup);
 
-  setupClose.addEventListener('keydown', enterPressHandler);
+  setupClose.addEventListener('keydown', onEnterPress);
 
   document.querySelector('.setup-similar').classList.remove('hidden');
 
@@ -75,7 +75,7 @@ function onDocumentKeydown(evt) {
   var setupUserName = document.querySelector('.setup-user-name');
   var eventNumber = evt.keyCode;
   if (eventNumber === ESC_CODE && document.activeElement !== setupUserName) {
-    closeSetupPopupHandler();
+    onCloseSetupPopup();
   }
 }
 
@@ -102,7 +102,7 @@ function changeFireballColors() {
 }
 
 
-function openSetupPopup() {
+function onOpenSetupPopup() {
   var wizardEyes = document.querySelector('.wizard-eyes');
   var wizardCoat = document.querySelector('.wizard-coat');
   var setupElement = document.querySelector('.setup');
@@ -114,7 +114,7 @@ function openSetupPopup() {
   setupFireballWrap.addEventListener('click', changeFireballColors);
 }
 
-function closeSetupPopupHandler() {
+function onCloseSetupPopup() {
   var setupElement = document.querySelector('.setup');
   setupElement.classList.add('hidden');
   document.removeEventListener('keydown', onDocumentKeydown);
@@ -124,4 +124,4 @@ var similarListElement = document.querySelector('.setup-similar-list');
 
 renderWizards(similarListElement, wizardsList);
 
-popupActivation();
+activatePopup();
