@@ -63,15 +63,22 @@ function onSetupOpenKeydown(evt) {
   }
 }
 
+function onCloseSetup() {
+  onCloseSetupPopup();
+}
+
+function onOpenSetup() {
+  onOpenSetupPopup();
+}
 
 function activatePopup() {
   var setupClose = document.querySelector('.setup-close');
   var setupOpen = document.querySelector('.setup-open');
-  setupOpen.addEventListener('click', onOpenSetupPopup);
+  setupOpen.addEventListener('click', onOpenSetup);
 
   setupOpen.addEventListener('keydown', onSetupOpenKeydown);
 
-  setupClose.addEventListener('click', onCloseSetupPopup);
+  setupClose.addEventListener('click', onCloseSetup);
 
   setupClose.addEventListener('keydown', onSetupCloseKeydown);
 
