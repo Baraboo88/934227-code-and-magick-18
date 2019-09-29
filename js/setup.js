@@ -49,23 +49,31 @@ function renderWizards(block, elementsArray) {
   block.appendChild(documentFragment);
 }
 
-function onEnterPress(evt) {
+function onSetupCloseKeydown(evt) {
   var eventNumber = evt.keyCode;
   if (eventNumber === ENTER_CODE) {
     onCloseSetupPopup();
   }
 }
 
+function onSetupOpenKeydown(evt) {
+  var eventNumber = evt.keyCode;
+  if (eventNumber === ENTER_CODE) {
+    onOpenSetupPopup();
+  }
+}
+
+
 function activatePopup() {
   var setupClose = document.querySelector('.setup-close');
   var setupOpen = document.querySelector('.setup-open');
   setupOpen.addEventListener('click', onOpenSetupPopup);
 
-  setupOpen.addEventListener('keydown', onEnterPress);
+  setupOpen.addEventListener('keydown', onSetupOpenKeydown);
 
   setupClose.addEventListener('click', onCloseSetupPopup);
 
-  setupClose.addEventListener('keydown', onEnterPress);
+  setupClose.addEventListener('keydown', onSetupCloseKeydown);
 
   document.querySelector('.setup-similar').classList.remove('hidden');
 
