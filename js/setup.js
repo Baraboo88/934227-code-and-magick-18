@@ -1,7 +1,8 @@
 'use strict';
 
 var WIZARD_COUNT = 4;
-
+var ENTER_CODE = 13;
+var ESC_CODE = 27;
 
 var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var surnames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
@@ -48,34 +49,33 @@ function renderWizards(block, elementsArray) {
   block.appendChild(documentFragment);
 }
 
-function handlersRegistration() {
+function enterPressHandler(evt) {
+  var eventNumber = evt.keyCode;
+  if (eventNumber === ENTER_CODE) {
+    closeSetupPopupHandler();
+  }
+}
+
+function popupActivation() {
   var setupClose = document.querySelector('.setup-close');
   var setupOpen = document.querySelector('.setup-open');
   setupOpen.addEventListener('click', openSetupPopup);
 
   setupOpen.addEventListener('keydown', enterPressHandler);
 
-  function enterPressHandler(evt) {
-    var eventNumber = evt.keyCode;
-    if (eventNumber === 13) {
-      closeSetupPopup();
-    }
-  }
-
-  setupClose.addEventListener('click', closeSetupPopup);
+  setupClose.addEventListener('click', closeSetupPopupHandler);
 
   setupClose.addEventListener('keydown', enterPressHandler);
 
   document.querySelector('.setup-similar').classList.remove('hidden');
-
 
 }
 
 function onDocumentKeydown(evt) {
   var setupUserName = document.querySelector('.setup-user-name');
   var eventNumber = evt.keyCode;
-  if (eventNumber === 27 && document.activeElement !== setupUserName) {
-    closeSetupPopup();
+  if (eventNumber === ESC_CODE && document.activeElement !== setupUserName) {
+    closeSetupPopupHandler();
   }
 }
 
@@ -114,7 +114,7 @@ function openSetupPopup() {
   setupFireballWrap.addEventListener('click', changeFireballColors);
 }
 
-function closeSetupPopup() {
+function closeSetupPopupHandler() {
   var setupElement = document.querySelector('.setup');
   setupElement.classList.add('hidden');
   document.removeEventListener('keydown', onDocumentKeydown);
@@ -124,4 +124,4 @@ var similarListElement = document.querySelector('.setup-similar-list');
 
 renderWizards(similarListElement, wizardsList);
 
-handlersRegistration();
+popupActivation();
