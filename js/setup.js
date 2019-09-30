@@ -52,7 +52,7 @@ function renderWizards(block, elementsArray) {
 function onSetupCloseKeydown(evt) {
   var eventNumber = evt.keyCode;
   if (eventNumber === ENTER_CODE) {
-    onCloseSetupPopup();
+    closeWindow();
   }
 }
 
@@ -64,7 +64,7 @@ function onSetupOpenKeydown(evt) {
 }
 
 function onCloseSetup() {
-  onCloseSetupPopup();
+  closeWindow();
 }
 
 function onOpenSetup() {
@@ -90,7 +90,7 @@ function onDocumentKeydown(evt) {
   var setupUserName = document.querySelector('.setup-user-name');
   var eventNumber = evt.keyCode;
   if (eventNumber === ESC_CODE && document.activeElement !== setupUserName) {
-    onCloseSetupPopup();
+    closeWindow();
   }
 }
 
@@ -129,7 +129,7 @@ function onOpenSetupPopup() {
   setupFireballWrap.addEventListener('click', changeFireballColors);
 }
 
-function onCloseSetupPopup() {
+function closeWindow() {
   var setupElement = document.querySelector('.setup');
   setupElement.classList.add('hidden');
   document.removeEventListener('keydown', onDocumentKeydown);
