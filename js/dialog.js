@@ -8,7 +8,7 @@
   var ENTER_CODE = 13;
   var ESC_CODE = 27;
 
-  function escClick(evt, action) {
+  function clickEsc(evt, action) {
     var setupUserName = document.querySelector('.setup-user-name');
     var eventNumber = evt.keyCode;
     if (eventNumber === ESC_CODE && document.activeElement !== setupUserName) {
@@ -16,7 +16,7 @@
     }
   }
 
-  function enterClick(evt, action) {
+  function clickEnter(evt, action) {
     var eventNumber = evt.keyCode;
     if (eventNumber === ENTER_CODE) {
       action();
@@ -24,11 +24,11 @@
   }
 
   function onSetupCloseKeydown(evt) {
-    enterClick(evt, closeWindow);
+    clickEnter(evt, closeWindow);
   }
 
   function onSetupOpenKeydown(evt) {
-    enterClick(evt, openSetupPopup);
+    clickEnter(evt, openSetupPopup);
   }
 
   function onCloseSetup() {
@@ -40,7 +40,7 @@
   }
 
   function onDocumentKeydown(evt) {
-    escClick(evt, closeWindow);
+    clickEsc(evt, closeWindow);
   }
 
   function onClickEyesChange() {
