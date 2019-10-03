@@ -8,18 +8,18 @@
   var ENTER_CODE = 13;
   var ESC_CODE = 27;
 
-  function clickEsc(evt, action) {
+  function clickEsc(evt, escClicked) {
     var setupUserName = document.querySelector('.setup-user-name');
     var eventNumber = evt.keyCode;
     if (eventNumber === ESC_CODE && document.activeElement !== setupUserName) {
-      action();
+      escClicked();
     }
   }
 
-  function clickEnter(evt, action) {
+  function clickEnter(evt, enterClicked) {
     var eventNumber = evt.keyCode;
     if (eventNumber === ENTER_CODE) {
-      action();
+      enterClicked();
     }
   }
 
