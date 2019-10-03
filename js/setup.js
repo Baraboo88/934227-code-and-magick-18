@@ -1,9 +1,12 @@
 'use strict';
 
 (function () {
-  var similarListElement = document.querySelector('.setup-similar-list');
   var WIZARD_COUNT = 4;
-  var wizardsList = window.util.getListOfWizards(WIZARD_COUNT);
+  var similarListElement = document.querySelector('.setup-similar-list');
+  var wizardsList = getListOfWizards(WIZARD_COUNT);
+  function getListOfWizards(numberOfWizards) {
+    return new Array(numberOfWizards).fill('').map(window.makeWizard);
+  }
   window.renderWizards(similarListElement, wizardsList);
   window.activatePopup();
 })();

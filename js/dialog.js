@@ -5,22 +5,30 @@
   var setupLeftInitial = setupElement.style.left;
   var setupTopInitial = setupElement.style.top;
 
-  window.activatePopup = function () {
-    var setupClose = document.querySelector('.setup-close');
-    var setupOpen = document.querySelector('.setup-open');
-    setupOpen.addEventListener('click', onOpenSetup);
-    setupOpen.addEventListener('keydown', onSetupOpenKeydown);
-    setupClose.addEventListener('click', onCloseSetup);
-    setupClose.addEventListener('keydown', onSetupCloseKeydown);
-    document.querySelector('.setup-similar').classList.remove('hidden');
-  };
+  var ENTER_CODE = 13;
+  var ESC_CODE = 27;
+
+  function escClick(evt, action) {
+    var setupUserName = document.querySelector('.setup-user-name');
+    var eventNumber = evt.keyCode;
+    if (eventNumber === ESC_CODE && document.activeElement !== setupUserName) {
+      action();
+    }
+  }
+
+  function enterClick(evt, action) {
+    var eventNumber = evt.keyCode;
+    if (eventNumber === ENTER_CODE) {
+      action();
+    }
+  }
 
   function onSetupCloseKeydown(evt) {
-    window.util.enterEvent(evt, closeWindow);
+    enterClick(evt, closeWindow);
   }
 
   function onSetupOpenKeydown(evt) {
-    window.util.enterEvent(evt, openSetupPopup);
+    enterClick(evt, openSetupPopup);
   }
 
   function onCloseSetup() {
@@ -32,9 +40,8 @@
   }
 
   function onDocumentKeydown(evt) {
-    window.util.escEvent(evt, closeWindow);
+    escClick(evt, closeWindow);
   }
-
 
   function onClickEyesChange() {
     var wizardEyes = document.querySelector('.wizard-eyes');
@@ -90,13 +97,21 @@
 
     var dragged = false;
 
+    function onClickPreventDefault(evtDef) {
+      evtDef.preventDefault();
+      dialogElement.removeEventListener('click', onClickPreventDefault);
+    }
+
     function onMouseMove(moveEvt) {
       evt.preventDefault();
-      dragged = true;
       var shift = {
         x: startCoords.x - moveEvt.clientX,
         y: startCoords.y - moveEvt.clientY,
       };
+
+      if (shift.x || shift.y) {
+        dragged = true;
+      }
 
       startCoords = {
         x: moveEvt.clientX,
@@ -109,15 +124,10 @@
 
     function onMouseUp(upEvt) {
       upEvt.preventDefault();
-
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
 
       if (dragged) {
-        var onClickPreventDefault = function (evtDef) {
-          evtDef.preventDefault();
-          dialogElement.removeEventListener('click', onClickPreventDefault);
-        };
         dialogElement.addEventListener('click', onClickPreventDefault);
       }
     }
@@ -126,6 +136,16 @@
     document.addEventListener('mouseup', onMouseUp);
 
   }
+
+  window.activatePopup = function () {
+    var setupClose = document.querySelector('.setup-close');
+    var setupOpen = document.querySelector('.setup-open');
+    setupOpen.addEventListener('click', onOpenSetup);
+    setupOpen.addEventListener('keydown', onSetupOpenKeydown);
+    setupClose.addEventListener('click', onCloseSetup);
+    setupClose.addEventListener('keydown', onSetupCloseKeydown);
+    document.querySelector('.setup-similar').classList.remove('hidden');
+  };
 
 
 })();
