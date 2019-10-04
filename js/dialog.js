@@ -148,7 +148,7 @@
     setupElement.appendChild(element);
   }
 
-  window.activatePopup = function () {
+  function activatePopup() {
     var setupClose = document.querySelector('.setup-close');
     var setupOpen = document.querySelector('.setup-open');
     setupOpen.addEventListener('click', onOpenSetup);
@@ -160,6 +160,11 @@
       event.preventDefault();
       window.backend.save(formData, onOkResponse, onErrorResponse);
     });
+  }
+
+  window.dialog = {
+    activatePopup: activatePopup,
+    onErrorResponse: onErrorResponse
   };
 
 
