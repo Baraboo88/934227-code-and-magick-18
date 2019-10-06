@@ -1,12 +1,15 @@
 'use strict';
 
 (function () {
-  var WIZARD_COUNT = 4;
-  var similarListElement = document.querySelector('.setup-similar-list');
-  var wizardsList = getListOfWizards(WIZARD_COUNT);
-  function getListOfWizards(numberOfWizards) {
-    return new Array(numberOfWizards).fill('').map(window.makeWizard);
+
+
+  function onErrorLoadResponse(msg) {
+    var footerElement = document.querySelector('footer');
+    var element = document.createElement('DIV');
+    element.textContent = 'Что-то пошло не так :) - Маги не загрузились. ' + msg;
+    footerElement.appendChild(element);
   }
-  window.renderWizards(similarListElement, wizardsList);
-  window.activatePopup();
+
+  window.backend.load(window.renderWizards, onErrorLoadResponse);
+  window.dialog.activatePopup();
 })();

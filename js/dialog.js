@@ -4,6 +4,7 @@
   var setupElement = document.querySelector('.setup');
   var setupLeftInitial = setupElement.style.left;
   var setupTopInitial = setupElement.style.top;
+  var formData = new FormData(document.querySelector('.setup-wizard-form'));
 
   var ENTER_CODE = 13;
   var ESC_CODE = 27;
@@ -137,7 +138,22 @@
 
   }
 
-  window.activatePopup = function () {
+  function onSendFormdataSuccess() {
+    closeWindow();
+  }
+
+  function onErrorSaveResponse(msg) {
+    var element = document.createElement('DIV');
+    element.textContent = 'Что-то пошло не так :)' + msg;
+    setupElement.appendChild(element);
+  }
+
+  function onFormSubmitClick(evt) {
+    evt.preventDefault();
+    window.backend.save(formData, onSendFormdataSuccess, onErrorSaveResponse);
+  }
+
+  function activatePopup() {
     var setupClose = document.querySelector('.setup-close');
     var setupOpen = document.querySelector('.setup-open');
     setupOpen.addEventListener('click', onOpenSetup);
@@ -145,6 +161,11 @@
     setupClose.addEventListener('click', onCloseSetup);
     setupClose.addEventListener('keydown', onSetupCloseKeydown);
     document.querySelector('.setup-similar').classList.remove('hidden');
+    document.querySelector('.setup-submit').addEventListener('click', onFormSubmitClick);
+  }
+
+  window.dialog = {
+    activatePopup: activatePopup,
   };
 
 
