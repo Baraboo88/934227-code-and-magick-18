@@ -166,7 +166,6 @@
 
   window.dialog = {
     activatePopup: activatePopup,
-    onErrorSaveResponse: onErrorSaveResponse
   };
 
 
