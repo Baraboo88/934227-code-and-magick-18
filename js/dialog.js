@@ -138,14 +138,19 @@
 
   }
 
-  function onOkResponse() {
+  function onSendFormdataSuccess() {
     closeWindow();
   }
 
-  function onErrorResponse(msg) {
+  function onErrorSaveResponse(msg) {
     var element = document.createElement('DIV');
     element.textContent = 'Что-то пошло не так :)' + msg;
     setupElement.appendChild(element);
+  }
+
+  function onFormSubmitClick(evt) {
+    evt.preventDefault();
+    window.backend.save(formData, onSendFormdataSuccess, onErrorSaveResponse);
   }
 
   function activatePopup() {
@@ -156,15 +161,12 @@
     setupClose.addEventListener('click', onCloseSetup);
     setupClose.addEventListener('keydown', onSetupCloseKeydown);
     document.querySelector('.setup-similar').classList.remove('hidden');
-    document.querySelector('.setup-submit').addEventListener('click', function (event) {
-      event.preventDefault();
-      window.backend.save(formData, onOkResponse, onErrorResponse);
-    });
+    document.querySelector('.setup-submit').addEventListener('click', onFormSubmitClick);
   }
 
   window.dialog = {
     activatePopup: activatePopup,
-    onErrorResponse: onErrorResponse
+    onErrorSaveResponse: onErrorSaveResponse
   };
 
 

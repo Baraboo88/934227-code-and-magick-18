@@ -11,8 +11,6 @@
 
 
   function load(onLoad, onError) {
-
-
     function onLoadResponse() {
       if (xhr.status === 200) {
         onLoad(xhr.response);
@@ -23,6 +21,11 @@
 
     }
 
+    function onErrorResponse() {
+      onError('Произошла ошибка соединения');
+    }
+
+    xhr.addEventListener('error', onErrorResponse);
     xhr.addEventListener('load', onLoadResponse);
 
     xhr.open('GET', loadUrl);
@@ -36,14 +39,19 @@
     function onSendResponse() {
       if (xhr.status === 200) {
         onLoad();
-        xhr.removeEventListener('readystatechange', onSendResponse);
+        xhr.removeEventListener('load', onSendResponse);
       } else {
         onError('Cтатус ответа: ' + xhr.status + ' ' + xhr.statusText);
       }
     }
 
-    xhr.addEventListener('readystatechange', onSendResponse);
+    function onErrorResponse() {
+      onError('Произошла ошибка соединения');
+    }
 
+
+    xhr.addEventListener('load', onSendResponse);
+    xhr.addEventListener('error', onErrorResponse);
     xhr.open('POST', saveUrl);
     xhr.send(data);
   }
