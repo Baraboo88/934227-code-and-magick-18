@@ -56,7 +56,7 @@
   }
 
   window.wizardsRender = {
-    getWizards: getWizards,
+    loadWizards: getWizards,
     renderWizards: renderWizards,
   };
 })();

@@ -9,18 +9,6 @@
   var ENTER_CODE = 13;
   var ESC_CODE = 27;
 
-  var DEBOUNCE_INTERVAL = 500; // ms
-
-  var lastTimeout;
-
-  function debounce(cb) {
-    if (lastTimeout) {
-      window.clearTimeout(lastTimeout);
-
-    }
-    lastTimeout = setTimeout(cb, DEBOUNCE_INTERVAL);
-
-  }
 
   function clickEsc(evt, escClicked) {
     var setupUserName = document.querySelector('.setup-user-name');
@@ -62,7 +50,7 @@
     var randomEyesColor = window.util.getRandomItem(window.data.eyesColors);
     wizardEyes.style.fill = randomEyesColor;
     document.querySelector('[name=eyes-color]').value = randomEyesColor;
-    debounce(window.wizardsRender.renderWizards);
+    window.util.debounce(window.wizardsRender.renderWizards);
   }
 
   function onClickCoatChange() {
@@ -70,7 +58,7 @@
     var randomCoatColor = window.util.getRandomItem(window.data.coatColors);
     wizardCoat.style.fill = randomCoatColor;
     document.querySelector('[name=coat-color]').value = randomCoatColor;
-    debounce(window.wizardsRender.renderWizards);
+    window.util.debounce(window.wizardsRender.renderWizards);
   }
 
 
