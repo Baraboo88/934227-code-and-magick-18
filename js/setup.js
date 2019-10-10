@@ -10,6 +10,6 @@
     footerElement.appendChild(element);
   }
 
-  window.backend.load(window.renderWizards, onErrorLoadResponse);
+  window.backend.load(window.wizardsRender.getWizards, onErrorLoadResponse);
   window.dialog.activatePopup();
 })();
