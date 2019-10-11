@@ -9,6 +9,7 @@
   var ENTER_CODE = 13;
   var ESC_CODE = 27;
 
+
   function clickEsc(evt, escClicked) {
     var setupUserName = document.querySelector('.setup-user-name');
     var eventNumber = evt.keyCode;
@@ -49,6 +50,7 @@
     var randomEyesColor = window.util.getRandomItem(window.data.eyesColors);
     wizardEyes.style.fill = randomEyesColor;
     document.querySelector('[name=eyes-color]').value = randomEyesColor;
+    window.util.debounce(window.render.renderWizards);
   }
 
   function onClickCoatChange() {
@@ -56,6 +58,7 @@
     var randomCoatColor = window.util.getRandomItem(window.data.coatColors);
     wizardCoat.style.fill = randomCoatColor;
     document.querySelector('[name=coat-color]').value = randomCoatColor;
+    window.util.debounce(window.render.renderWizards);
   }
 
 
