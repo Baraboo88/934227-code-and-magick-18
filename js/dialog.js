@@ -50,7 +50,7 @@
     var randomEyesColor = window.util.getRandomItem(window.data.eyesColors);
     wizardEyes.style.fill = randomEyesColor;
     document.querySelector('[name=eyes-color]').value = randomEyesColor;
-    window.util.debounce(window.wizardsRender.renderWizards);
+    window.util.debounce(window.render.renderWizards);
   }
 
   function onClickCoatChange() {
@@ -58,7 +58,7 @@
     var randomCoatColor = window.util.getRandomItem(window.data.coatColors);
     wizardCoat.style.fill = randomCoatColor;
     document.querySelector('[name=coat-color]').value = randomCoatColor;
-    window.util.debounce(window.wizardsRender.renderWizards);
+    window.util.debounce(window.render.renderWizards);
   }
 
 

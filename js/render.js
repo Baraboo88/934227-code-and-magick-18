@@ -35,7 +35,6 @@
 
 
   function renderWizards() {
-
     var documentFragment = document.createDocumentFragment();
     similarListElement.innerHTML = '';
     wizards
@@ -50,13 +49,13 @@
     similarListElement.appendChild(documentFragment);
   }
 
-  function getWizards(elementsArray) {
+  function fetchWizards(elementsArray) {
     wizards = Array.from(elementsArray);
     renderWizards();
   }
 
-  window.wizardsRender = {
-    loadWizards: getWizards,
+  window.render = {
+    fetchWizards: fetchWizards,
     renderWizards: renderWizards,
   };
 })();
