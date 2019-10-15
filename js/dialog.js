@@ -9,6 +9,11 @@
   var ENTER_CODE = 13;
   var ESC_CODE = 27;
 
+  var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
+  var fileChooser = document.querySelector('.upload input[type=file]');
+  var preview = document.querySelector('.setup-user-pic');
+
 
   function clickEsc(evt, escClicked) {
     var setupUserName = document.querySelector('.setup-user-name');
@@ -81,6 +86,7 @@
     wizardEyes.addEventListener('click', onClickEyesChange);
     wizardCoat.addEventListener('click', onClickCoatChange);
     setupFireballWrap.addEventListener('click', onChangeFireballColors);
+    fileChooser.addEventListener('change', onFileChoserChange);
   }
 
   function closeWindow() {
@@ -88,6 +94,7 @@
     setupElement.style.left = setupLeftInitial;
     setupElement.style.top = setupTopInitial;
     document.removeEventListener('keydown', onDocumentKeydown);
+    fileChooser.removeEventListener('change', onFileChoserChange);
   }
 
   function onClickMove(evt) {
@@ -154,6 +161,27 @@
   function onFormSubmitClick(evt) {
     evt.preventDefault();
     window.backend.save(formData, onSendFormdataSuccess, onErrorSaveResponse);
+  }
+
+  function onFileChoserChange() {
+    var file = fileChooser.files[0];
+    var fileName = file.name.toLowerCase();
+
+    var matches = FILE_TYPES.some(function (it) {
+      return fileName.endsWith(it);
+    });
+
+    function onReaderLoad() {
+      preview.src = reader.result;
+    }
+
+    if (matches) {
+      var reader = new FileReader();
+
+      reader.addEventListener('load', onReaderLoad);
+
+      reader.readAsDataURL(file);
+    }
   }
 
   function activatePopup() {
